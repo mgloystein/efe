@@ -14,7 +14,7 @@ import {
 	DEFAULT_SETTINGS
 } from './settings'
 
-import { FileEditorView } from './views'
+// import { FileEditorView } from './views'
 import { EncryptionKeySuggest } from './editor'
 import { extend } from 'lodash'
 
@@ -43,7 +43,7 @@ export default class FileEncryptPlugin extends Plugin {
 		)
 		this.registerEditorSuggest(suggestions)
 
-		this.registerView(constants.VIEW_TYPE_ENCRYPTED_EDITOR, leaf => new FileEditorView(leaf))
+		// this.registerView(constants.VIEW_TYPE_ENCRYPTED_EDITOR, leaf => new FileEditorView(leaf))
 
 		// Set up encryption actions
 		const fnEncryptActiveFile = () => {
@@ -122,7 +122,9 @@ export default class FileEncryptPlugin extends Plugin {
 	}
 
 	async loadSettings() {
-		this.settings = extend({}, DEFAULT_SETTINGS, await this.loadData())
+		const settings = await this.loadData()
+		console.log(126, settings)
+		this.settings = extend({}, DEFAULT_SETTINGS, settings)
 	}
 
 	saveSettings() {

@@ -54,14 +54,14 @@ export class EncryptionKeySuggest extends EditorSuggest<string> {
     super(app)
     this.FM_KEY = settings.keyIdProperty
     this.subscription = subscription
-
+    console.log(57, settings, this.kids)
     this.update(settings.Keys)
 
     const chars = this.FM_KEY.split('').map(char => regExEscape[char] || char);
     const minSet = chars.splice(0, this.FM_KEY.length / 2);
 
     this.lineMatcher = new RegExp(['^', minSet.join(''), chars.join('?'), '?:? ?'].join(''));
-    this.kidLine = new RegExp('^' + this.FM_KEY + ': .+$');
+    this.kidLine = new RegExp('^' + this.FM_KEY + ': [^$]');
 
     this.subscription.on(constants.KEY_LIST_UPDATE_EVENT, (evt: any) => {
       this.update(evt.body.keys)

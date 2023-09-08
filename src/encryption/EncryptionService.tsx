@@ -73,6 +73,7 @@ class encryptionService {
       }
       this.authList.delete(keyId)
     }
+    console.log(this.authList)
 
     const result = new Promise<boolean>((resolve) => {
       const ketSey: KeySet = this.settings.Keys[keyId]
